@@ -1,0 +1,18 @@
+<% content_for :title, "Bars" %>
+
+
+<% if notice.present? %>
+  <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block w-full" id="notice"><%= notice %></p>
+<% end %>
+  
+
+<div class="flex mb-8">
+  <h1 class="text-2xl font-bold w-full">Bars</h1>
+  <div class="flex gap-4">
+    <%= link_to new_bar_path, class: "btn btn-primary" do %>
+      <%= lucide_icon "plus", class: "size-4" %>
+      New Bar
+    <% end%>
+  </div>
+</div>
+<%= render "results"%>

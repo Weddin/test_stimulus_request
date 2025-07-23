@@ -1,0 +1,11 @@
+<% content_for :title, @foo.name_was %>
+<% if notice.present? %>
+  <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block w-full" id="notice"><%= notice %></p>
+<% end %>
+<div class="flex gap-4">
+  <h1 class="text-2xl font-bold w-full">Editing Foo</h1>
+  <div>
+    <%= link_to "Bars", bars_path(q: { foo_id_eq: @foo.id }), class: "btn btn-secondary" %>
+  </div>
+</div>
+<%= render "form", foo: @foo %>

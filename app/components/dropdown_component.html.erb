@@ -1,0 +1,22 @@
+<%= tag.div class: "input mb-0", data: { controller: "dropdown focus@window->dropdown#focus-outside", action: @rest[:url] } do %>
+
+  <div class="relative">
+    <%= @form.label @name %>
+    <%= @form.input (@name.to_s+"_id").to_sym, as: :hidden, input_html: { data: { dropdown_target: "input" } } %>
+    <%= tag.input(type: "search", name: "", value: @form.object.send(@name)&.name, class: "w-full", data: { action: "dropdown#search focus->dropdown#enter blur->dropdown#leave blur->dropdown#returnSelected focus->dropdown#search keydown.up->dropdown#up keydown.down->dropdown#down keydown.enter->dropdown#selectCurrent:prevent", dropdown_target: "search", autocomplete: "off" }) %>
+    <%#= @form.input @name, as: :string, hint: false, input_html: { , autocomplete: 'off' } } %>
+    <%= turbo_frame_tag("#{@name}_dropdown",
+      class: "flex flex-col transition transform z-9999 origin-top-left absolute left-0 mt-2 min-w-64 w-full rounded-md shadow-lg bg-white ring-1 ring-border ring-opacity-5 focus:outline-none hidden px-4",
+      data: { dropdown_target: "menu",
+        transition_enter_from: "opacity-0 scale-95",
+        transition_enter_to: "opacity-100 scale-100",
+        transition_leave_from: "opacity-100 scale-100",
+        transition_leave_to: "opacity-0 scale-95",
+      }) do %>
+      <div class="py-4">
+        <div class="text-muted-foreground text-center">Loading...</div>
+      </div>
+    <% end %>
+  </div>
+  <%= @form.hint @name%>
+<% end %>

@@ -1,0 +1,20 @@
+<%= turbo_stream.update "foo_dropdown" do %>
+  <div class="py-4">
+    <% if @foos.present? %>
+      <div class="text-sm text-muted-foreground">
+        Select Foo from list:
+      </div>
+    <% else %>
+      <div class="text-sm text-muted-foreground text-center">
+        Need to specify Foo name
+      </div>
+    <% end %>
+    <div class="flex flex-col">
+      <% @foos.each do |foo| %>
+        <%= tag.button(type: "button", class: "flex items-center gap-2 hover:bg-gray-100 -mx-4 px-4 py-2", data: { turbo_frame: "foo_dropdown", action: "dropdown#select", dropdown_target: "item", dropdown_id_param: foo.id, dropdown_name_param: foo.name }) do %>
+          <%= foo.name %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

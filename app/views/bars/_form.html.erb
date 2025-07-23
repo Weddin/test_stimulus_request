@@ -1,0 +1,21 @@
+<%= simple_form_for(bar, html: { class: "space-y-4" }) do |form| %>
+  <% if bar.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(bar.errors.count, "error") %> prohibited this bar from being saved:</h2>
+      <ul>
+        <% bar.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.input :name %>
+  <%= form.input :descriptions %>
+  <%= render DropdownComponent.new(form: form, name: :foo, url: url_for(action: :dropdown, controller: :foos))%>
+  <hr class="border-gray-200">
+  <%= form.submit class: "btn btn-primary" %>
+  <%= link_to "Cancel", bars_path, class: "btn btn-secondary" %>
+  <% if bar.persisted? %>
+    <%= link_to "Remove", bar, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure that you want to delete this bar?" }, class: "btn btn-danger" %>
+  <% end %>
+<% end %>

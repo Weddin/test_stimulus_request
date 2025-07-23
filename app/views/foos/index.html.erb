@@ -1,0 +1,65 @@
+<% content_for :title, "Foos" %>
+
+<% if notice.present? %>
+  <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block w-full" id="notice"><%= notice %></p>
+<% end %>
+
+<div class="flex mb-8">
+  <h1 class="text-2xl font-bold w-full">Foos</h1>
+  <div class="flex gap-4">
+    <%= link_to new_foo_path, class: "btn btn-primary" do %>
+      <%= lucide_icon "plus", class: "size-4" %>
+      New Foo
+    <% end%>
+  </div>
+</div>
+
+<%= search_form_for @q, html: { data: { controller: "search", 'search-table-outlet': "#table-data" } } do |f| %>
+  <div class="flex gap-4 w-full">
+    <div class="flex w-full gap-4">
+      <%= f.search_field :name_cont, placeholder: "Name", class: "w-full" %>
+    </div>
+    <div class="flex gap-4">
+      <%= f.select :status_eq, Foo.status.options, prompt: "(All)", placeholder: "Status",  class: "w-full" %>
+    </div>
+    <div class="flex gap-4">
+      <%= f.submit "Search", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<table id="table-data" class="table-auto w-full index-table" data-controller="table" data-columns="name,time,checked,price,status">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Time</th>
+      <th>Checked</th>
+      <th>Price</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @foos.each do |foo| %>
+      <tr onclick="window.location.href='<%= foo_path(foo) %>'"></tr>
+        <td><%= link_to foo.name, foo_path(foo), class: "text-blue-600 hover:text-blue-800", data: { turbo: false } %></td>
+        <td><%= l(foo.time, format: "%d/%m/%Y %H:%M:%S") %></td>
+        <td><%= foo.checked %></td>
+        <td><%= number_to_currency(foo.price) %></td>
+        <td><%= foo.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="6" class="space-y-2" >
+        <div data-table-target="pagination">
+          <%= paginate @foos, data: { controller: "pagination", pagination_target: "pagination" } %>
+        </div>
+        <div data-table-target="pageinfo">
+          <%= page_entries_info @foos, entry_name: "Foo" %>
+        </div>
+      </td>
+    </tr>
+  </tfoot>
+</table>

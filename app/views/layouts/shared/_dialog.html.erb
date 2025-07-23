@@ -1,0 +1,16 @@
+<dialog id="turbo-confirm" class="m-auto w-96 bg-white rounded-lg fixed top-[-4rem] px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:p-6">
+  <form method="dialog">
+    <div class="sm:flex sm:items-start">
+      <div class="mt-3 text-center sm:mt-0 sm:text-left">
+        <h3 class="text-base font-semibold leading-6 text-gray-900">Are you sure?</h3>
+        <div class="mt-2">
+          <p class="text-sm text-gray-500" data-js="dialog-message"></p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse gap-4">
+      <button value="confirm" class="btn btn-primary"><%= t("simple_form.confirm") %></button> 
+      <button value="cancel" class="btn btn-outline"><%= t("simple_form.cancel") %></button>
+    </div>
+  </form>
+</dialog>

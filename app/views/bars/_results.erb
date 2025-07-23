@@ -1,0 +1,40 @@
+<%= turbo_frame_tag "results", class: "space-y-4" do %>
+  <%= search_form_for @q, html: { data: { turbo_stream: true } } do |f| %>
+    <div class="flex gap-4 w-full">
+      <div class="flex w-full gap-4">
+        <%= f.search_field :name_cont, placeholder: "Name", class: "w-full" %>
+      </div>
+      <div class="flex gap-4">
+        <%= f.submit "Search", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+    <table class="table-auto w-full index-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Descriptions</th>
+          <th>Foo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bars.each do |bar| %>
+          <tr >
+            <td onclick="window.location.href='<%= bar_path(bar) %>'"><%= link_to bar.name, bar, class: "text-blue-600 hover:text-blue-800", data: { turbo: false } %></td>
+            <td onclick="window.location.href='<%= bar_path(bar) %>'"><%= bar.descriptions %></td>
+            <td onclick="window.location.href='<%= foo_path(bar.foo) %>'"><%= link_to bar.foo.name, bar.foo, class: "text-blue-600 hover:text-blue-800", data: { turbo: false } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">
+            <%= paginate @bars %>
+            <%= page_entries_info @bars %>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+<% end %>

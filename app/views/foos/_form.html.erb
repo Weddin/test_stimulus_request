@@ -1,0 +1,23 @@
+<%= simple_form_for(foo, html: { class: "space-y-4" }) do |form| %>
+  <% if foo.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(foo.errors.count, "error") %> prohibited this foo from being saved:</h2>
+      <ul>
+        <% foo.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.input :name %>
+  <%= form.input :time, html5: true %> 
+  <%= form.input :checked, as: :boolean %>
+  <%= form.input :price %>
+  <%= form.input :status, collection: Foo.status.options, prompt: false %>
+  <hr class="border-gray-200">
+  <%= form.submit class: "btn btn-primary" %>
+  <%= link_to "Cancel", foos_path, class: "btn btn-secondary" %>
+  <% if foo.persisted? %>
+    <%= link_to "Remove", foo, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure that you want to delete this foo?" }, class: "btn btn-danger" %>
+  <% end %>
+<% end %>
