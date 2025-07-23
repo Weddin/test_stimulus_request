@@ -4,7 +4,7 @@ class BarsController < ApplicationController
   # GET /bars or /bars.json
   def index
     @q = Bar.ransack(params[:q])
-    @bars = @q.result.page(params[:page])
+    @bars = @q.result.page(params[:page]).includes(:foo)
   end
 
   # GET /bars/1 or /bars/1.json
