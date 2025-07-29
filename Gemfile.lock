@@ -107,7 +107,8 @@ GEM
     erubi (1.13.1)
     faker (3.5.2)
       i18n (>= 1.8.11, < 2)
-    foreman (0.88.1)
+    foreman (0.90.0)
+      thor (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.7)
@@ -168,6 +169,8 @@ GEM
       net-protocol
     nio4r (2.7.4)
     nokogiri (1.18.9-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-linux-gnu)
       racc (~> 1.4)
     parallel (1.27.0)
     parser (3.3.8.0)
@@ -311,6 +314,7 @@ GEM
       railties (>= 7.0.0)
       tailwindcss-ruby (~> 4.0)
     tailwindcss-ruby (4.1.11-x86_64-darwin)
+    tailwindcss-ruby (4.1.11-x86_64-linux-gnu)
     thor (1.4.0)
     timeout (0.4.3)
     turbo-rails (2.0.12)
@@ -343,6 +347,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin
+  x86_64-linux
 
 DEPENDENCIES
   benchmark (~> 0.4.1)
@@ -354,7 +359,7 @@ DEPENDENCIES
   debug
   enumerize (~> 2.8)
   faker (~> 3.5)
-  foreman (~> 0.88.1)
+  foreman (~> 0.90.0)
   importmap-rails
   jbuilder
   kaminari (~> 1.2)
